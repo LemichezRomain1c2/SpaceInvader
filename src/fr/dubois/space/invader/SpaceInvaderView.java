@@ -30,13 +30,10 @@ public class SpaceInvaderView extends View {
 	// Dimensions souhaitées
 	private static final int TARGET_HEIGHT = 800;
 	private static final int TARGET_WIDTH = 600;
-
 	private Paint paint; // Style pour le texte	
 	private String text; // texte à afficher
-	private Alien Alien;
-
+	private Alien alien;
 	
-
 	public SpaceInvaderView(Context context) {
 		super(context);
 		init();
@@ -63,17 +60,9 @@ public class SpaceInvaderView extends View {
 		paint.setTextSize(36);
 		paint.setTextAlign(Paint.Align.CENTER);
 		text = "Texte";
-		Bitmap alien = loadImage(R.drawable.alien1);
-		this.Alien =new Alien(alien,50,50);
+		Bitmap alien=loadImage(R.drawable.alien1); 
+		this.alien = new Alien(alien,0,0);
 	}
-
-
-
-	private static final int alien1 = 1;
-	private static final int ic_launcher = 2;
-	private static final int missile = 3;
-	private static final int missile2 = 4;
-	private static final int ship = 5;
 	
     public Bitmap loadImage(int image) {
     	
@@ -85,7 +74,7 @@ public class SpaceInvaderView extends View {
     x = tile.getIntrinsicWidth();		
     y = tile.getIntrinsicHeight();
    	
-    Bitmap bitmap = Bitmap.createBitmap(x,y,null);
+    Bitmap bitmap = Bitmap.createBitmap(x,y,Bitmap.Config.ARGB_8888);
     Canvas canvas = new Canvas(bitmap);
     tile.setBounds(0, 0, x, y);
     tile.draw(canvas);
@@ -99,9 +88,10 @@ public class SpaceInvaderView extends View {
 		super.onDraw(canvas);
 		canvas.drawRGB(0, 0, 0);
 		canvas.drawRect(0, 0, TARGET_WIDTH-1, TARGET_HEIGHT-1, paint);
-		
+		alien.draw(canvas);
 		if (text != null){
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
+			
 		}
 	}
 
